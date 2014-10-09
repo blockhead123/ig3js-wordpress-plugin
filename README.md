@@ -1,4 +1,4 @@
-ig3js-wordpress-plugin
+IG3JS Wordpress Plugin
 ======================
 
 Image Gallery Threejs Wordpress Plugin
