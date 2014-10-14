@@ -183,7 +183,7 @@ class IG3JSWordpressPlugin{
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style($this->plugin_slug . "-plugin-styles", plugins_url("css/public.css", __FILE__), array(),
+		wp_enqueue_style($this->plugin_slug . "-plugin-styles", plugins_url("css/image-gallery-three.css", __FILE__), array(),
 			$this->version);
 	}
 
@@ -193,7 +193,11 @@ class IG3JSWordpressPlugin{
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script($this->plugin_slug . "-plugin-script", plugins_url("js/public.js", __FILE__), array("jquery"),
+        wp_enqueue_script($this->plugin_slug . "-plugin-script-assets", plugins_url("js/assets.min.js", __FILE__), array("jquery"),
+            $this->version);
+        wp_enqueue_script($this->plugin_slug . "-plugin-script-ig3js", plugins_url("js/image-gallery-three.min.js", __FILE__), array("jquery"),
+            $this->version);
+		wp_enqueue_script($this->plugin_slug . "-plugin-script-ig3jsp", plugins_url("js/ig3js-wordpress-plugin.js", __FILE__), array("jquery"),
 			$this->version);
 	}
 
