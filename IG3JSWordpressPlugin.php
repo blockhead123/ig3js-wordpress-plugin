@@ -82,6 +82,103 @@ class IG3JSWordpressPlugin{
 
 	}
 
+	public function ig3jsWp( $atts ) {
+
+		if(isset($atts['images'])){
+
+		$img = explode(",",$atts['images']);
+
+			$curWidth = 500;
+
+			if(isset($atts['width'])){
+				$curWidth = $atts['width'];
+			}
+			$curHeight = 500;
+
+			if(isset($atts['height'])){
+				$curHeight = $atts['height'];
+			}
+
+		?>
+			<div class="ig3js-canvas"></div>
+			<div class="ig3js-nav">
+				<a href="#" class="prev">previous</a>
+				<span class="goto"></span>
+				<a href="#" class="next">next</a> <br />
+			</div>
+			<div class="ig3js-perspectives">
+				<a href="#" class="defP">default</a>
+				<a href="#" class="trP">top right</a>
+				<a href="#" class="tlP">top left</a>
+			</div>
+			<script type='text/javascript'>
+				jQuery(document).ready(function($){
+					var box = $('.ig3js-canvas').ig3js({
+						manifest: [
+							<?php
+
+							$cnt = 0;
+
+							foreach($img as $imgItem){
+								$cnt++;
+								?>
+								{src:"<?php echo $imgItem; ?>", id:"image<?php echo $cnt; ?>"},
+								<?php
+							}
+
+							?>
+						],
+						imagePath: '',
+						alphaBackground: true,
+						onNavigateComplete: function(obj){
+							//     console.log("navigation complete");
+							//     console.log(obj);
+						},
+						canvasWindow:{
+							defaultWidth: <?php echo $curWidth; ?>,
+							defaultHeight: <?php echo $curHeight; ?>
+						}
+					});
+					$(".ig3js-nav .next").click(function(){
+						box.navigate.next();
+						return false;
+					});
+
+					$(".ig3js-nav .prev").click(function(){
+						box.navigate.prev();
+						return false;
+					});
+
+					$(".ig3js-perspectives .defP").click(function(){
+						box.perspective.default();
+						return false;
+					});
+
+					$(".ig3js-perspectives .trP").click(function(){
+						box.perspective.topRight();
+						return false;
+					});
+
+					$(".ig3js-perspectives .tlP").click(function(){
+						box.perspective.topLeft();
+						return false;
+					});
+
+					for(count=1; count<=<?php echo count($img); ?>; count++){
+						$(".ig3js-nav .goto").append('<a href="#" class="goto'+count+'" pos="'+(count-1)+'"> '+count+' </a>');
+						$(".ig3js-nav .goto"+count).click(function(){
+							box.navigate.goTo($(this).attr("pos"));
+							return false;
+						});
+					}
+				});
+			</script>
+			<?php
+		}
+		return "";
+	}
+
+
 	/**
 	 * Return an instance of this class.
 	 *
@@ -193,8 +290,17 @@ class IG3JSWordpressPlugin{
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+
+		wp_enqueue_script($this->plugin_slug . "-plugin-script-threejs", '//cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js', array("jquery"),
+			$this->version);
         wp_enqueue_script($this->plugin_slug . "-plugin-script-assets", plugins_url("js/assets.min.js", __FILE__), array("jquery"),
             $this->version);
+		wp_enqueue_script($this->plugin_slug . "-plugin-script-preloadjs", '//cdnjs.cloudflare.com/ajax/libs/PreloadJS/0.3.1/preloadjs.min.js', array("jquery"),
+			$this->version);
+		wp_enqueue_script($this->plugin_slug . "-plugin-script-tweenmax", '//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js', array("jquery"),
+			$this->version);
+		wp_enqueue_script($this->plugin_slug . "-plugin-script-stats", '//cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js', array("jquery"),
+			$this->version);
         wp_enqueue_script($this->plugin_slug . "-plugin-script-ig3js", plugins_url("js/image-gallery-three.min.js", __FILE__), array("jquery"),
             $this->version);
 		wp_enqueue_script($this->plugin_slug . "-plugin-script-ig3jsp", plugins_url("js/ig3js-wordpress-plugin.js", __FILE__), array("jquery"),
@@ -231,7 +337,9 @@ class IG3JSWordpressPlugin{
 	 */
 	public function action_method_name() {
 		// TODO: Define your action hook callback here
+
 	}
+
 
 	/**
 	 * NOTE:  Filters are points of execution in which WordPress modifies data
@@ -245,5 +353,6 @@ class IG3JSWordpressPlugin{
 	public function filter_method_name() {
 		// TODO: Define your filter hook callback here
 	}
-
 }
+
+add_shortcode( 'IG3JS', array( 'IG3JSWordpressPlugin', 'ig3jsWp' ) );

@@ -1,0 +1,19 @@
+.ig3js-nav{
+    text-align: center;
+}
+.ig3js-perspectives{
+    text-align: center;
+}
+.ig3js-canvas{
+    text-align: center;
+}
+.ig3js-perspectives a,
+.ig3js-nav a{
+    border: 0.1em solid;
+    border-radius: 21px;
+    padding: 1em;
+    margin: 0.2em;
+    background-color: #ccc;
+    font-size: 0.7em;
+    line-height: 4em;
+}
