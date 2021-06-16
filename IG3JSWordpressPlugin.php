@@ -291,11 +291,11 @@ class IG3JSWordpressPlugin{
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script($this->plugin_slug . "-plugin-script-threejs", '//cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js', array("jquery"),
+		wp_enqueue_script($this->plugin_slug . "-plugin-script-threejs", '//cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array("jquery"),
 			$this->version);
         wp_enqueue_script($this->plugin_slug . "-plugin-script-assets", plugins_url("js/assets.min.js", __FILE__), array("jquery"),
             $this->version);
-		wp_enqueue_script($this->plugin_slug . "-plugin-script-preloadjs", '//cdnjs.cloudflare.com/ajax/libs/PreloadJS/0.3.1/preloadjs.min.js', array("jquery"),
+		wp_enqueue_script($this->plugin_slug . "-plugin-script-preloadjs", '//cdnjs.cloudflare.com/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js', array("jquery"),
 			$this->version);
 		wp_enqueue_script($this->plugin_slug . "-plugin-script-tweenmax", '//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js', array("jquery"),
 			$this->version);
