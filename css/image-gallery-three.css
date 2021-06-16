@@ -1,1 +1,58 @@
-body{-webkit-touch-callout:none;-webkit-text-size-adjust:none;-webkit-user-select:none;font-family:Monospace;background-color:#000;overflow:hidden}*{-webkit-tap-highlight-color:transparent}A:active,A:link,A:visited{text-decoration:none;color:#86b0b0}A:hover{text-decoration:underline;color:#00e5e5}
+
+#fork {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: url("../images/github.png") 0 0 no-repeat;
+    display: block;
+    width: 149px;
+    height: 149px;
+    text-indent: -9999px;
+    z-index: 9999;
+}
+
+
+.ig3js-nav{
+    text-align: center;
+}
+.ig3js-perspectives{
+    text-align: center;
+}
+.ig3js-canvas {
+    border: 1px solid;
+    text-align: center;
+    display: block;
+    position: relative;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 50px;
+    width: 70% !important;
+	max-width: 100% !important; 
+}
+.ig3js-canvas canvas{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100% !important;
+    height: 64vh !important;
+}
+.ig3js-perspectives a,
+.ig3js-nav a{
+    border: 0.1em solid;
+    border-radius: 21px;
+    padding: 1em;
+    margin: 0.2em;
+    background-color: #555;
+    font-size: 0.7em;
+    line-height: 4em;
+    color: #000;
+    font-family: helvetica, arial;
+    text-align: center;
+    text-decoration: none;
+}
+
+.ig3js-perspectives a:hover,
+.ig3js-nav a:hover{
+    color: #fff;
+    text-decoration: none;
+
+}
